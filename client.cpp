@@ -34,16 +34,21 @@ int main( int argc, char** argv ) {
         return -2;
     }
 
-    char recvbuf[100], input[100];
+    char recvbuf[100];//, input[100];
+    std::string input;
     int state = recv(clientfd, recvbuf, sizeof(recvbuf), 0);
     std::cout << "Client starts" << std::endl;
     std::cout << recvbuf << std::endl << "> ";
-    std::cin >> input;
+//    std::cin.getline(input, 100);
+    std::getline(std::cin, input);
     while (1) {
         //send(clientfd, input, sizeof(input), 0);
-        write(clientfd, input, sizeof(input));
+        if (input=="quit")
+            break;
+        write(clientfd, input.c_str(), sizeof(input));
         std::cout << "> ";
-        std::cin >> input;
+        //std::cin.getline(input, 100); // bye will leave automatically
+        std::getline(std::cin, input);
     }
     close(clientfd);
     return 0;
