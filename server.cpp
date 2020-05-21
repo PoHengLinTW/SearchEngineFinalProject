@@ -24,7 +24,7 @@ int read_from_client(int fd) {
     else if (nbyte == 0)
         return -1;
     
-    std::cerr << "Server: got message: \n" << buf << std::endl;
+    std::cerr << "Server: got message from " << fd << " : \n" << buf << std::endl;
     return nbyte;
 }
 
